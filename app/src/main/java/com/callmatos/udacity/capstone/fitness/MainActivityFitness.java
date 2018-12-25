@@ -1,5 +1,6 @@
 package com.callmatos.udacity.capstone.fitness;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.android.gms.common.util.SharedPreferencesUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +42,7 @@ public class MainActivityFitness extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main_fitness);
         unbinder = ButterKnife.bind(this);
 
@@ -55,9 +59,15 @@ public class MainActivityFitness extends AppCompatActivity
         });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
+
         toggle.syncState();
+
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Start drawer open.
+        drawer.openDrawer(GravityCompat.START);
     }
 
     @Override

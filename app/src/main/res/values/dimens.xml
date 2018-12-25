@@ -8,4 +8,7 @@
 
     <!-- Main app bar -->
     <dimen name="height_appbarlayout">150dp</dimen>
+
+    <!-- Login page -->
+    <dimen name="login_margin_layout">8dp</dimen>
 </resources>
