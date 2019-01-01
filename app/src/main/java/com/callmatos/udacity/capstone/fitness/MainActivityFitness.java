@@ -13,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.callmatos.udacity.capstone.fitness.fragments.ClientListFragment;
 import com.google.android.gms.common.util.SharedPreferencesUtils;
 
 import butterknife.BindView;
@@ -27,17 +30,20 @@ public class MainActivityFitness extends AppCompatActivity
     //Main
     private Unbinder unbinder;
 
-    @BindView(R.id.fab)
-    public FloatingActionButton fab;
-
-    @BindView(R.id.toolbar)
-    public Toolbar toolbar;
-
     @BindView(R.id.drawer_layout)
     public DrawerLayout drawer;
 
     @BindView(R.id.nav_view)
     public NavigationView navigationView;
+
+    //Image tumber
+    private ImageView tumbernairPersonal;
+    private TextView namePersonal;
+    private TextView emailPersonal;
+
+    //Reference to Fragment with list of client.
+    private ClientListFragment clientListFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +52,30 @@ public class MainActivityFitness extends AppCompatActivity
         setContentView(R.layout.activity_main_fitness);
         unbinder = ButterKnife.bind(this);
 
-        //Support to change
-        setSupportActionBar(toolbar);
+        //Get the Fragment to pass the data to it.
+        this.clientListFragment = (ClientListFragment) getSupportFragmentManager().findFragmentById(R.id.clientListFragment);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        //Support to change
+        setSupportActionBar(this.clientListFragment.toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, this.clientListFragment.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+        //Mount Navigation
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //ImagePersonalGoogleID
+        this.tumbernairPersonal = navigationView.findViewById(R.id.imageView);
+        this.namePersonal = navigationView.findViewById(R.id.personalName);
+        this.emailPersonal = navigationView.findViewById(R.id.emailPersonal);
+
+        //Start drawer open.
+        drawer.openDrawer(GravityCompat.START);
+
+
+        this.clientListFragment.fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -57,17 +83,6 @@ public class MainActivityFitness extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        drawer.addDrawerListener(toggle);
-
-        toggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Start drawer open.
-        drawer.openDrawer(GravityCompat.START);
     }
 
     @Override

@@ -8,10 +8,12 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <include
+    <fragment
+        android:id="@+id/clientListFragment"
         layout="@layout/app_bar_main_activity_fitness"
+        android:name="com.callmatos.udacity.capstone.fitness.fragments.ClientListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

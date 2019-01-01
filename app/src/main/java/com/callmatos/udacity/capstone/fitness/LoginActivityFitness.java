@@ -17,6 +17,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,6 +38,14 @@ public class LoginActivityFitness extends AppCompatActivity {
 
     @BindView(R.id.btn_signin_google)
     public SignInButton singButton;
+
+    @BindString(R.string.usernotfound)
+    public String userNotFound;
+
+    @OnClick(R.id.btn_signin_google)
+    public void onClick(View view) {
+        signIn();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +74,7 @@ public class LoginActivityFitness extends AppCompatActivity {
                 updateUIGoogle(account);
             } catch (ApiException e) {
                 Log.e("teste", String.valueOf(e.getStatusCode()));
-                Snackbar.make(singButton, getResources().getText(R.string.usernotfound), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(singButton, userNotFound, Snackbar.LENGTH_LONG).show();
             }
 
         }
@@ -89,7 +98,7 @@ public class LoginActivityFitness extends AppCompatActivity {
     private void updateUIGoogle(GoogleSignInAccount account) {
 
         if (account == null) {
-            Snackbar.make(singButton, getResources().getText(R.string.usernotfound), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(singButton, userNotFound, Snackbar.LENGTH_LONG).show();
         } else {
             UserGoogle user = new UserGoogle();
             user.setUsername(account.getGivenName());
@@ -108,9 +117,5 @@ public class LoginActivityFitness extends AppCompatActivity {
         return googleClient;
     }
 
-    @OnClick(R.id.btn_signin_google)
-    public void onClick(View view) {
-        signIn();
-    }
 
 }
