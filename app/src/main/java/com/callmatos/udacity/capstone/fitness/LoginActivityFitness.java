@@ -31,7 +31,7 @@ public class LoginActivityFitness extends AppCompatActivity {
     private static final int GS_ID = 900;
 
     //Key
-    private static final String USERKEY = "userkey";
+    public static final String USERKEY = "userkey";
 
     // data
     private static final String UserSignCLIENT = "userSingInClient";
@@ -105,8 +105,11 @@ public class LoginActivityFitness extends AppCompatActivity {
             user.setEmail(account.getEmail());
             user.setPhotoURL(String.valueOf(account.getPhotoUrl()));
 
+            //Save the user on SharePreference
+            Util.saveOwnPersonalOnSharedPreference(this,user);
+
             Intent intent = new Intent(this, MainActivityFitness.class);
-            intent.putExtra(USERKEY, account);
+            intent.putExtra(USERKEY, user);
             startActivity(intent);
 
             this.finish();

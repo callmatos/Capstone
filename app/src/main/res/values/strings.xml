@@ -12,4 +12,7 @@
     <string name="loginContentDescription">Login screen</string>
 
     <string name="usernotfound">User logout!</string>
+    <string name="nav_group">Account</string>
+    <string name="nav_logout_name">Logout</string>
+    <string name="nav_exit_name">Exit</string>
 </resources>

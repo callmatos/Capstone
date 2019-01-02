@@ -1,7 +1,9 @@
 package com.callmatos.udacity.capstone.fitness;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -17,8 +19,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.callmatos.udacity.capstone.fitness.fragments.ClientListFragment;
+import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.util.SharedPreferencesUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -36,8 +44,11 @@ public class MainActivityFitness extends AppCompatActivity
     @BindView(R.id.nav_view)
     public NavigationView navigationView;
 
+    // The data of user Loggin
+    private UserGoogle currentUser;
+
     //Image tumber
-    private ImageView tumbernairPersonal;
+    public ImageView tumbernairPersonal;
     private TextView namePersonal;
     private TextView emailPersonal;
 
@@ -48,9 +59,40 @@ public class MainActivityFitness extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main_fitness);
-        unbinder = ButterKnife.bind(this);
+        ButterKnife.bind(this);
+
+        //ImagePersonalGoogleID
+        View header = navigationView.getHeaderView(0);
+
+        this.tumbernairPersonal = (ImageView) header.findViewById(R.id.userTumberImage);
+        this.namePersonal = (TextView) header.findViewById(R.id.personalName);
+        this.emailPersonal = (TextView) header.findViewById(R.id.emailPersonal);
+
+        //Recover the login done.
+        if(getIntent() != null){
+            //verify if has the user on Bandle
+            if(getIntent().hasExtra(LoginActivityFitness.USERKEY)){
+                this.currentUser = (UserGoogle) getIntent().getParcelableExtra(LoginActivityFitness.USERKEY);
+            }else{
+                //Recover the UserLogin session
+                GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+                if(account != null){
+                    this.currentUser.setEmail(account.getEmail());
+                    this.currentUser.setPhotoURL(String.valueOf(account.getPhotoUrl()));
+                    this.currentUser.setUsername(account.getGivenName());
+                }else{
+                    Intent it = new Intent(this,LoginActivityFitness.class);
+                    startActivity(it);
+                    this.finish();
+                }
+
+            }
+        }
+
+        //Mount the user data logged.
+        mountUserGoogleInformation();
+
 
         //Get the Fragment to pass the data to it.
         this.clientListFragment = (ClientListFragment) getSupportFragmentManager().findFragmentById(R.id.clientListFragment);
@@ -58,6 +100,7 @@ public class MainActivityFitness extends AppCompatActivity
         //Support to change
         setSupportActionBar(this.clientListFragment.toolbar);
 
+        //Toggle User
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, this.clientListFragment.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -65,11 +108,6 @@ public class MainActivityFitness extends AppCompatActivity
 
         //Mount Navigation
         navigationView.setNavigationItemSelectedListener(this);
-
-        //ImagePersonalGoogleID
-        this.tumbernairPersonal = navigationView.findViewById(R.id.imageView);
-        this.namePersonal = navigationView.findViewById(R.id.personalName);
-        this.emailPersonal = navigationView.findViewById(R.id.emailPersonal);
 
         //Start drawer open.
         drawer.openDrawer(GravityCompat.START);
@@ -83,6 +121,12 @@ public class MainActivityFitness extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void mountUserGoogleInformation() {
+        Util.loadImageProfile(this, String.valueOf(this.currentUser.getPhotoURL()), this.tumbernairPersonal);
+        this.emailPersonal.setText(this.currentUser.getEmail());
+        this.namePersonal.setText(this.currentUser.getUsername());
     }
 
     @Override
@@ -130,14 +174,21 @@ public class MainActivityFitness extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        }else if (id == R.id.nav_logout) {
+            signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void signOut(){
+        LoginActivityFitness.getGoogleSignInClient().signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                finish();
+            }
+        });
     }
 }
