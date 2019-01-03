@@ -16,8 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.callmatos.udacity.capstone.fitness.R;
+import com.callmatos.udacity.capstone.fitness.adapter.ClientAdapter;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +46,12 @@ public class ClientListFragment extends Fragment {
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout collapsingToolbarLayout;
 
+    // Data to show inside the RecycleView
+    private List<ClientPersonal> listClients;
+
+    // Adapter with data to show inside the fragment.
+    private ClientAdapter clientAdapter;
+
     //Listener to MainActivity Fitness
     private OnFragmentInteractionListener mListener;
 
@@ -59,6 +68,9 @@ public class ClientListFragment extends Fragment {
 
         //Configure the RecycleView
         this.recyclerViewClient.setHasFixedSize(true);
+
+        // Set adapter to RecyclerView to show the iformation
+        this.recyclerViewClient.setAdapter(this.clientAdapter);
 
         return viewInflater;
     }
@@ -113,6 +125,11 @@ public class ClientListFragment extends Fragment {
     public interface OnFragmentInteractionListener {
 
         void onClientSelected(ClientPersonal selectClient);
+    }
+
+    //Method to update the list of Client to show inside the fragment.
+    public void updateDataClient(List<ClientPersonal> listClientPersonal){
+        this.clientAdapter.updateClientData(listClientPersonal);
     }
 
 }

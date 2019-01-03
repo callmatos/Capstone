@@ -1,11 +1,18 @@
 package com.callmatos.udacity.capstone.fitness;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,14 +25,19 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import study.callmatos.org.bakingapp.persistence.PopularRecipeDataBase;
 import com.callmatos.udacity.capstone.fitness.fragments.ClientListFragment;
+import com.callmatos.udacity.capstone.fitness.loaders.ClientTaskLoader;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
+import com.callmatos.udacity.capstone.fitness.persistence.ClientViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.util.SharedPreferencesUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.List;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -34,7 +46,14 @@ import butterknife.Unbinder;
 
 
 public class MainActivityFitness extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ClientListFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        ClientListFragment.OnFragmentInteractionListener,
+        LoaderManager.LoaderCallbacks<List<ClientPersonal>>{
+
+    private static final String TAG = MainActivityFitness.class.getSimpleName();
+
+    //Used to loader data.
+    private static final int CLIENTCAST_LOADER_ID = 0;
 
     //Main
     private Unbinder unbinder;
@@ -56,16 +75,19 @@ public class MainActivityFitness extends AppCompatActivity
     //Reference to Fragment with list of client.
     private ClientListFragment clientListFragment;
 
+    //Information saved.
+    private Bundle bundleSaved = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_fitness);
         ButterKnife.bind(this);
 
         //ImagePersonalGoogleID
         View header = navigationView.getHeaderView(0);
-
         this.tumbernairPersonal = (ImageView) header.findViewById(R.id.userTumberImage);
         this.namePersonal = (TextView) header.findViewById(R.id.personalName);
         this.emailPersonal = (TextView) header.findViewById(R.id.emailPersonal);
@@ -91,12 +113,25 @@ public class MainActivityFitness extends AppCompatActivity
             }
         }
 
+        
         //Mount the user data logged.
         mountUserGoogleInformation();
 
-
         //Get the Fragment to pass the data to it.
         this.clientListFragment = (ClientListFragment) getSupportFragmentManager().findFragmentById(R.id.clientListFragment);
+
+        //Init the loader to loader the information of client
+        getSupportLoaderManager().initLoader(CLIENTCAST_LOADER_ID,bundleSaved, this);
+
+        // View model Providers to called when the database updated.
+        ClientViewModel mvm = ViewModelProviders.of(this).get(ClientViewModel.class);
+        mvm.getClients().observe(this, new Observer<List<ClientPersonal>>() {
+            @Override
+            public void onChanged(@Nullable List<ClientPersonal> taskEntries) {
+                Log.d(TAG, "Receiving database update from LiveData");
+                clientListFragment.updateDataClient(taskEntries);
+            }
+        });
 
         //Support to change
         setSupportActionBar(this.clientListFragment.toolbar);
@@ -106,7 +141,6 @@ public class MainActivityFitness extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         //Mount Navigation
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -114,6 +148,7 @@ public class MainActivityFitness extends AppCompatActivity
         drawer.openDrawer(GravityCompat.START);
 
 
+        // Method is call when the user click the button ADD.
         this.clientListFragment.fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -197,5 +232,24 @@ public class MainActivityFitness extends AppCompatActivity
     public void onClientSelected(ClientPersonal selectClient) {
         Snackbar.make(this.clientListFragment.getView(), "Client was selected", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+    }
+
+    @NonNull
+    @Override
+    public Loader<List<ClientPersonal>> onCreateLoader(int i, @Nullable Bundle bundle) {
+        return new ClientTaskLoader(this);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<List<ClientPersonal>> loader, List<ClientPersonal> clientPersonals) {
+
+        if(clientPersonals != null){
+            this.clientListFragment.updateDataClient(clientPersonals);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<List<ClientPersonal>> loader) {
+
     }
 }
