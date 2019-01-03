@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.callmatos.udacity.capstone.fitness.fragments.ClientListFragment;
+import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -33,7 +34,7 @@ import butterknife.Unbinder;
 
 
 public class MainActivityFitness extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ClientListFragment.OnFragmentInteractionListener {
 
     //Main
     private Unbinder unbinder;
@@ -190,5 +191,11 @@ public class MainActivityFitness extends AppCompatActivity
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onClientSelected(ClientPersonal selectClient) {
+        Snackbar.make(this.clientListFragment.getView(), "Client was selected", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 }
