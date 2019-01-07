@@ -14,6 +14,12 @@ public class ClientPersonal implements Serializable {
 
     private String name;
 
+    private String locationName;
+
+    private long timeWorkout;
+
+    private int totalWorkout;
+
     public Integer getId() {
         return id;
     }
@@ -28,5 +34,29 @@ public class ClientPersonal implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public int getTotalWorkout() {
+        return totalWorkout;
+    }
+
+    public void setTotalWorkout(int totalWorkout) {
+        this.totalWorkout = totalWorkout;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public long getTimeWorkout() {
+        return timeWorkout;
+    }
+
+    public void setTimeWorkout(long timeWorkout) {
+        this.timeWorkout = timeWorkout;
     }
 }

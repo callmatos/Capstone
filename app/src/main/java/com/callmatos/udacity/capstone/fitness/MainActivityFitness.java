@@ -3,12 +3,9 @@ package com.callmatos.udacity.capstone.fitness;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -19,13 +16,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import study.callmatos.org.bakingapp.persistence.PopularRecipeDataBase;
 import com.callmatos.udacity.capstone.fitness.fragments.ClientListFragment;
 import com.callmatos.udacity.capstone.fitness.loaders.ClientTaskLoader;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
@@ -33,13 +28,11 @@ import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
 import com.callmatos.udacity.capstone.fitness.persistence.ClientViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.util.SharedPreferencesUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -65,7 +58,7 @@ public class MainActivityFitness extends AppCompatActivity
     public NavigationView navigationView;
 
     // The data of user Loggin
-    private UserGoogle currentUser;
+    private UserGoogle googleCurrentUser;
 
     //Image tumber
     public ImageView tumbernairPersonal;
@@ -96,14 +89,16 @@ public class MainActivityFitness extends AppCompatActivity
         if(getIntent() != null){
             //verify if has the user on Bandle
             if(getIntent().hasExtra(LoginActivityFitness.USERKEY)){
-                this.currentUser = (UserGoogle) getIntent().getParcelableExtra(LoginActivityFitness.USERKEY);
+                this.googleCurrentUser = (UserGoogle) getIntent().getParcelableExtra(LoginActivityFitness.USERKEY);
             }else{
                 //Recover the UserLogin session
                 GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
                 if(account != null){
-                    this.currentUser.setEmail(account.getEmail());
-                    this.currentUser.setPhotoURL(String.valueOf(account.getPhotoUrl()));
-                    this.currentUser.setUsername(account.getGivenName());
+                    this.googleCurrentUser = new UserGoogle();
+                    this.googleCurrentUser.setEmail(account.getEmail());
+                    this.googleCurrentUser.setPhotoURL(String.valueOf(account.getPhotoUrl()));
+                    this.googleCurrentUser.setUsername(account.getGivenName());
                 }else{
                     Intent it = new Intent(this,LoginActivityFitness.class);
                     startActivity(it);
@@ -149,20 +144,24 @@ public class MainActivityFitness extends AppCompatActivity
 
 
         // Method is call when the user click the button ADD.
-        this.clientListFragment.fab.setOnClickListener(new View.OnClickListener() {
+        this.clientListFragment.fButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), NewClientActivityFitness.class);
+                intent.putExtra("user", googleCurrentUser);
+                intent.putExtra("add",true);
+                startActivity(intent);
             }
         });
+
+
     }
 
     private void mountUserGoogleInformation() {
-        Util.loadImageProfile(this, String.valueOf(this.currentUser.getPhotoURL()), this.tumbernairPersonal);
-        this.emailPersonal.setText(this.currentUser.getEmail());
-        this.namePersonal.setText(this.currentUser.getUsername());
+        Util.loadImageProfile(this, String.valueOf(this.googleCurrentUser.getPhotoURL()), this.tumbernairPersonal);
+        this.emailPersonal.setText(this.googleCurrentUser.getEmail());
+        this.namePersonal.setText(this.googleCurrentUser.getUsername());
     }
 
     @Override

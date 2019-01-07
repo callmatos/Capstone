@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.callmatos.udacity.capstone.fitness.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -16,17 +18,26 @@ import butterknife.ButterKnife;
  */
 public class ClientViewHolders extends RecyclerView.ViewHolder {
 
-//    @BindView(R.id.card_baking_item)
-//    public CardView cardView;
-//
-//    @BindView(R.id.card_baking_image)
-//    public ImageView cardViewImage;
-//
-//    @BindView(R.id.card_baking_title)
-//    public TextView cardTitle;
-//
-//    @BindView(R.id.card_baking_servis)
-//    public TextView cardServices;
+    @BindView(R.id.card_baking_item)
+    public CardView cardView;
+
+    @BindView(R.id.card_baking_image)
+     public ImageView imageClient;
+
+    @BindView(R.id.clientNameInformation)
+    public TextView clientName;
+
+    @BindView(R.id.gymLocationInformation)
+    public TextView locationInformation;
+
+    @BindView(R.id.gymTimeWorkout)
+    public TextView timeWorkout;
+
+    @BindView(R.id.totalworkout)
+    public TextView totalWorkout;
+
+    @BindView(R.id.img_location)
+    public ImageView imageLocation;
 
     //Default Constructor
     public ClientViewHolders(@NonNull View itemView) {

@@ -88,6 +88,10 @@ public class Util {
         return sharedPreferences.contains(SHARED_PREF_KEY);
     }
 
+    public static String convertToTime(long timeWorkout) {
+        return null;
+    }
+
 //    public static Recipe loadRecipeSaved(Context applicationContext) {
 //
 //        // Recipe to return

@@ -11,6 +11,11 @@
     <string name="labelgym">Gym : </string>
     <string name="time">Time : </string>
     <string name="workout">Workouts</string>
+    <string name="labelgoal">Goal:</string>
+    <string name="userimagedescription"> User Image</string>
+
+    <string name="labelclientname">Name:</string>
+    <string name="hintnameclient">Name of new client</string>
 
     <string name="title_activity_login_fitness">Use login</string>
     <string name="loginContentDescription">Login screen</string>
@@ -18,4 +23,8 @@
     <string name="nav_group">Account</string>
     <string name="nav_logout_name">Logout</string>
     <string name="nav_exit_name">Exit</string>
+    <string name="title_activity_new_client_fitness">New Client</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
