@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
+import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class ClientViewModel extends AndroidViewModel {
     private LiveData<List<ClientPersonal>> clients;
 
     private final MutableLiveData<ClientPersonal> selected = new MutableLiveData<ClientPersonal>();
+
+    private final MutableLiveData<UserGoogle> usergoogleLoggetd = new MutableLiveData<UserGoogle>();
 
     public ClientViewModel(@NonNull Application application) {
         super(application);
@@ -38,6 +41,12 @@ public class ClientViewModel extends AndroidViewModel {
     }
 
     public LiveData<ClientPersonal> getSelected() {
-        return selected;
+        return this.selected;
+    }
+
+    public void usergoogle(UserGoogle user){usergoogleLoggetd.setValue(user);}
+
+    public LiveData<UserGoogle> getUserGoogle(){
+        return this.usergoogleLoggetd;
     }
 }

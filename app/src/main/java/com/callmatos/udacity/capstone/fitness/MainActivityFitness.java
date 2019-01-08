@@ -70,6 +70,9 @@ public class MainActivityFitness extends AppCompatActivity
     private ClientListFragment clientListFragment;
     private FragmentShowClientInformation showInformationClientFragment;
 
+    //ViewModel to save and receiver notification when the database updated.
+    ClientViewModel clientViewModel;
+
     //Information saved.
     private Bundle bundleSaved = null;
 
@@ -80,6 +83,9 @@ public class MainActivityFitness extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_fitness);
         ButterKnife.bind(this);
+
+        //ViewModel to save data to all object.
+        this.clientViewModel = ViewModelProviders.of(this).get(ClientViewModel.class);
 
         //ImagePersonalGoogleID
         View header = navigationView.getHeaderView(0);
@@ -92,6 +98,7 @@ public class MainActivityFitness extends AppCompatActivity
             //verify if has the user on Bandle
             if(getIntent().hasExtra(LoginActivityFitness.USERKEY)){
                 this.googleCurrentUser = (UserGoogle) getIntent().getParcelableExtra(LoginActivityFitness.USERKEY);
+                this.clientViewModel.usergoogle(this.googleCurrentUser);
             }else{
                 //Recover the UserLogin session
                 GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -120,8 +127,7 @@ public class MainActivityFitness extends AppCompatActivity
         getSupportLoaderManager().initLoader(CLIENTCAST_LOADER_ID,bundleSaved, this);
 
         // View model Providers to called when the database updated.
-        ClientViewModel mvm = ViewModelProviders.of(this).get(ClientViewModel.class);
-        mvm.getClients().observe(this, new Observer<List<ClientPersonal>>() {
+        clientViewModel.getClients().observe(this, new Observer<List<ClientPersonal>>() {
 
             @Override
             public void onChanged(@Nullable List<ClientPersonal> taskEntries) {
