@@ -20,6 +20,10 @@ public class ClientPersonal implements Serializable {
 
     private int totalWorkout;
 
+    private String detalheGoal;
+
+    private String detalheGym;
+
     public Integer getId() {
         return id;
     }
@@ -58,5 +62,21 @@ public class ClientPersonal implements Serializable {
 
     public void setTimeWorkout(long timeWorkout) {
         this.timeWorkout = timeWorkout;
+    }
+
+    public String getDetalheGoal() {
+        return detalheGoal;
+    }
+
+    public String getDetalheGym() {
+        return detalheGym;
+    }
+
+    public void setDetalheGym(String detalheGym) {
+        this.detalheGym = detalheGym;
+    }
+
+    public void setDetalheGoal(String detalheGoal) {
+        this.detalheGoal = detalheGoal;
     }
 }

@@ -8,6 +8,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
+import com.google.android.gms.common.api.Api;
 
 import java.util.List;
 
@@ -23,18 +24,16 @@ public interface ClientDAO {
     @Query("DELETE FROM ClientPersonal")
     public void deleteAll();
 
-//    @Query("SELECT * from movie ORDER BY voteCount ASC")
-//    List<Movie> getAllMovies();
-//
+    @Query("SELECT * from clientpersonal ORDER BY name ASC")
+    List<ClientPersonal> getAllClientPersonal();
+
     @Query("SELECT * from clientpersonal ORDER BY id ASC")
     LiveData<List<ClientPersonal>> getAllClientLiveData();
-//
-//    @Query("SELECT * from movie where id = :id")
-//    Movie findMovieByIdRegistered(int id);
-//
-//    @Query("SELECT * from movie where uid = :id")
-//    Movie findMovieById(int id);
-//    @Query("SELECT * from movie where uid = :id")
-//    LiveData<Movie> findMovieByIdLiveData(int id);
+
+    @Query("SELECT * from clientpersonal where id = :id")
+    ClientPersonal findClientPersonalById(int id);
+
+    @Query("SELECT * from clientpersonal where id = :id")
+    LiveData<ClientPersonal> findClientPersonalByIdLiveData(int id);
 
 }

@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.callmatos.udacity.capstone.fitness.fragments.ClientListFragment;
+import com.callmatos.udacity.capstone.fitness.fragments.FragmentShowClientInformation;
 import com.callmatos.udacity.capstone.fitness.loaders.ClientTaskLoader;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
@@ -67,6 +68,7 @@ public class MainActivityFitness extends AppCompatActivity
 
     //Reference to Fragment with list of client.
     private ClientListFragment clientListFragment;
+    private FragmentShowClientInformation showInformationClientFragment;
 
     //Information saved.
     private Bundle bundleSaved = null;
@@ -107,7 +109,6 @@ public class MainActivityFitness extends AppCompatActivity
 
             }
         }
-
         
         //Mount the user data logged.
         mountUserGoogleInformation();
@@ -121,6 +122,7 @@ public class MainActivityFitness extends AppCompatActivity
         // View model Providers to called when the database updated.
         ClientViewModel mvm = ViewModelProviders.of(this).get(ClientViewModel.class);
         mvm.getClients().observe(this, new Observer<List<ClientPersonal>>() {
+
             @Override
             public void onChanged(@Nullable List<ClientPersonal> taskEntries) {
                 Log.d(TAG, "Receiving database update from LiveData");
@@ -229,8 +231,14 @@ public class MainActivityFitness extends AppCompatActivity
 
     @Override
     public void onClientSelected(ClientPersonal selectClient) {
-        Snackbar.make(this.clientListFragment.getView(), "Client was selected", Snackbar.LENGTH_LONG)
+
+
+
+        Snackbar.make(this.clientListFragment.getView(), "Client was selected - Call the fragment FragmentShowClientFormatioin", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+
+
+
     }
 
     @NonNull

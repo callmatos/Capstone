@@ -23,6 +23,7 @@ import com.callmatos.udacity.capstone.fitness.R;
 import com.callmatos.udacity.capstone.fitness.adapter.ClientAdapter;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
+import com.callmatos.udacity.capstone.fitness.persistence.ClientViewModel;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class ClientListFragment extends Fragment {
     private Unbinder unbinder;
 
     //Static object to single
-    private ClientListViewModel mViewModel;
+    private ClientViewModel mViewModel;
 
     @BindView(R.id.toolbar)
     public Toolbar toolbar;
@@ -74,7 +75,11 @@ public class ClientListFragment extends Fragment {
         this.clientAdapter = new ClientAdapter(getContext(), new ClientAdapter.OnItemClickListener() {
             @Override
             public void onClick(Integer position, ClientPersonal selected) {
+
+                mViewModel.select(selected);
                 Toast.makeText(getContext(), "Item selecionado para mostrar", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -88,8 +93,7 @@ public class ClientListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ClientListViewModel.class);
-        // TODO: Use the ViewModel
+        this.mViewModel = ViewModelProviders.of(getActivity()).get(ClientViewModel.class);
     }
 
     //Method to config the fragment.

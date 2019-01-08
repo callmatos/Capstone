@@ -3,6 +3,7 @@ package com.callmatos.udacity.capstone.fitness.persistence;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -17,6 +18,8 @@ public class ClientViewModel extends AndroidViewModel {
 
     private LiveData<List<ClientPersonal>> clients;
 
+    private final MutableLiveData<ClientPersonal> selected = new MutableLiveData<ClientPersonal>();
+
     public ClientViewModel(@NonNull Application application) {
         super(application);
 
@@ -28,5 +31,13 @@ public class ClientViewModel extends AndroidViewModel {
 
     public LiveData<List<ClientPersonal>> getClients() {
         return clients;
+    }
+
+    public void select(ClientPersonal item) {
+        selected.setValue(item);
+    }
+
+    public LiveData<ClientPersonal> getSelected() {
+        return selected;
     }
 }

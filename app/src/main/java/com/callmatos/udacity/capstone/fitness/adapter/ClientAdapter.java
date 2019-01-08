@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.callmatos.udacity.capstone.fitness.R;
 import com.callmatos.udacity.capstone.fitness.Util;
@@ -56,22 +57,15 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolders> {
         recipeViewHolders.timeWorkout.setText(Util.convertToTime(currentClientPersonal.getTimeWorkout()));
         recipeViewHolders.totalWorkout.setText(String.valueOf(currentClientPersonal.getTotalWorkout()));
 
+        //Image with click to call the Google Map to show the Gym location.
+        recipeViewHolders.imageLocation.setOnClickListener(new View.OnClickListener() {
 
-        //Mount the recycleview with the data.
-//        if(!currentRecipe.getImage().isEmpty()){
-//            Picasso.get().
-//                    load(currentRecipe.getImage()).
-//                    placeholder(R.drawable.desserts_default_op).
-//                    into(recipeViewHolders.cardViewImage);
-//        }else{
-//            recipeViewHolders.cardViewImage.setImageResource(this.getDrawableByName(currentRecipe.getName()));
-//        }
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Click on the Map - Show location", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        //Set the Title
-//        recipeViewHolders.cardTitle.setText(currentRecipe.getName());
-
-        //Set the Services
-//        recipeViewHolders.cardServices.setText(context.getString(R.string.services_title, currentRecipe.getServings()));
 
         //Set the Listener
         recipeViewHolders.itemView.setOnClickListener(new View.OnClickListener(){
