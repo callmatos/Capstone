@@ -54,17 +54,17 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolders> {
         //mount the cardview with information of client
         recipeViewHolders.clientName.setText(currentClientPersonal.getName());
         recipeViewHolders.locationInformation.setText(currentClientPersonal.getLocationName());
-        recipeViewHolders.timeWorkout.setText(Util.convertToTime(currentClientPersonal.getTimeWorkout()));
+        recipeViewHolders.timeWorkout.setText(Util.getTime(currentClientPersonal.getHour(),currentClientPersonal.getHour()));
         recipeViewHolders.totalWorkout.setText(String.valueOf(currentClientPersonal.getTotalWorkout()));
 
         //Image with click to call the Google Map to show the Gym location.
-        recipeViewHolders.imageLocation.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Click on the Map - Show location", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        recipeViewHolders.imageLocation.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context, "Click on the Map - Show location", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         //Set the Listener

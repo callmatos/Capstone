@@ -109,16 +109,16 @@ public class MainActivityFitness extends AppCompatActivity
                     this.googleCurrentUser.setPhotoURL(String.valueOf(account.getPhotoUrl()));
                     this.googleCurrentUser.setUsername(account.getGivenName());
                 }else{
-                    Intent it = new Intent(this,LoginActivityFitness.class);
-                    startActivity(it);
-                    this.finish();
+//                    Intent it = new Intent(this,LoginActivityFitness.class);
+//                    startActivity(it);
+//                    this.finish();
                 }
 
             }
         }
-        
+
         //Mount the user data logged.
-        mountUserGoogleInformation();
+//        mountUserGoogleInformation();
 
         //Get the Fragment to pass the data to it.
         this.clientListFragment = (ClientListFragment) getSupportFragmentManager().findFragmentById(R.id.clientListFragment);
@@ -237,8 +237,6 @@ public class MainActivityFitness extends AppCompatActivity
 
     @Override
     public void onClientSelected(ClientPersonal selectClient) {
-
-
 
         Snackbar.make(this.clientListFragment.getView(), "Client was selected - Call the fragment FragmentShowClientFormatioin", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();

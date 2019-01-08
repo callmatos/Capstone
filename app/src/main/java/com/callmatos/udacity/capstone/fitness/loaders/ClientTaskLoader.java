@@ -7,22 +7,30 @@ import android.view.View;
 import com.callmatos.udacity.capstone.fitness.MainActivityFitness;
 import com.callmatos.udacity.capstone.fitness.Util;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
+import com.callmatos.udacity.capstone.fitness.persistence.PersonalDataBase;
 
 import java.io.IOException;
 import java.util.List;
 
 public class ClientTaskLoader extends AsyncTaskLoader<List<ClientPersonal>> {
 
+    private static final String TAG = ClientTaskLoader.class.getSimpleName();
+
     //Data of Recipe
     private List<ClientPersonal> data;
+
+    //Object to reconver data
+    PersonalDataBase dataBase;
 
     // MainActivity.
     private MainActivityFitness context;
 
     //Constructor with context
     public ClientTaskLoader(MainActivityFitness mainActivity) {
+
         super(mainActivity);
         this.context = mainActivity;
+        this.dataBase = PersonalDataBase.getInstance(this.context);
     }
 
     @Override
@@ -31,9 +39,6 @@ public class ClientTaskLoader extends AsyncTaskLoader<List<ClientPersonal>> {
 
         if(data != null){
             deliverResult(data);
-        }else{
-//            this.context.recipeFragment.infLoad.setVisibility(View.VISIBLE);
-            forceLoad();
         }
     }
 
@@ -41,21 +46,7 @@ public class ClientTaskLoader extends AsyncTaskLoader<List<ClientPersonal>> {
     @Override
     public List<ClientPersonal> loadInBackground() {
 
-//        BakingService service = BakingHttpClient.getClient().create(BakingService.class);
-//        Call<List<Recipe>> call = service.getListRecipes();
-//
-//        //Execute the request
-//        try {
-//
-//            if(Util.checkConnection(context)){
-//                this.data = call.execute().body();
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-        return this.data;
+        return this.dataBase.clientDAO().getAllClientPersonal();
     }
 
     @Override

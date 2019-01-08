@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".NewClientActivityFitness">
 
-    <FrameLayout
-        android:id="@+id/inflateFragment"
+    <fragment
+        android:id="@+id/clientnewFragment"
+        layout="@layout/fragment_fragment_new_client"
+        android:name="com.callmatos.udacity.capstone.fitness.fragments.FragmentNewClient"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

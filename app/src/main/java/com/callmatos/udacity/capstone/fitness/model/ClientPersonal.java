@@ -9,20 +9,24 @@ import java.io.Serializable;
 public class ClientPersonal implements Serializable {
 
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
 
     private String name;
 
     private String locationName;
 
-    private long timeWorkout;
+    private int hour;
+
+    private int minute;
 
     private int totalWorkout;
 
     private String detalheGoal;
 
     private String detalheGym;
+
+    public ClientPersonal(){}
 
     public Integer getId() {
         return id;
@@ -56,14 +60,6 @@ public class ClientPersonal implements Serializable {
         this.locationName = locationName;
     }
 
-    public long getTimeWorkout() {
-        return timeWorkout;
-    }
-
-    public void setTimeWorkout(long timeWorkout) {
-        this.timeWorkout = timeWorkout;
-    }
-
     public String getDetalheGoal() {
         return detalheGoal;
     }
@@ -78,5 +74,21 @@ public class ClientPersonal implements Serializable {
 
     public void setDetalheGoal(String detalheGoal) {
         this.detalheGoal = detalheGoal;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
     }
 }

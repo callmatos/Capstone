@@ -73,6 +73,10 @@ public class LoginActivityFitness extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 updateUIGoogle(account);
             } catch (ApiException e) {
+
+                Intent intent = new Intent(this, MainActivityFitness.class);
+                startActivity(intent);
+
                 Log.e("teste", String.valueOf(e.getStatusCode()));
                 Snackbar.make(singButton, userNotFound, Snackbar.LENGTH_LONG).show();
             }

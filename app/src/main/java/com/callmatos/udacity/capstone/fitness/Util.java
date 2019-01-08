@@ -9,8 +9,9 @@ import android.widget.ImageView;
 import com.callmatos.udacity.capstone.fitness.model.UserGoogle;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Time;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 
 public class Util {
@@ -88,8 +89,11 @@ public class Util {
         return sharedPreferences.contains(SHARED_PREF_KEY);
     }
 
-    public static String convertToTime(long timeWorkout) {
-        return null;
+    public static String getTime(int hr,int min) {
+        Time tme = new Time(hr,min,0);//seconds by default set to zero
+        Format formatter;
+        formatter = new SimpleDateFormat("h:mm a");
+        return formatter.format(tme);
     }
 
 //    public static Recipe loadRecipeSaved(Context applicationContext) {

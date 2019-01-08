@@ -66,7 +66,7 @@ public class FragmentShowClientInformation extends Fragment {
         this.labelUserName.setText(this.clientPersonalSelected.getValue().getName());
         this.detalheGoal.setText(this.clientPersonalSelected.getValue().getDetalheGoal());
         this.detalheGym.setText(this.clientPersonalSelected.getValue().getDetalheGym());
-        this.detalheTime.setText(Util.convertToTime(this.clientPersonalSelected.getValue().getTimeWorkout()));
+        this.detalheTime.setText(Util.getTime(this.clientPersonalSelected.getValue().getHour(),this.clientPersonalSelected.getValue().getMinute()));
 
         //Implementar AssincTask to get of FireBase
         this.detalhetotalworkout.setText(this.clientPersonalSelected.getValue().getTotalWorkout());
