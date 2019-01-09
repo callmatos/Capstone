@@ -79,14 +79,13 @@ public class ClientListFragment extends Fragment {
             public void onClick(Integer position, ClientPersonal selected) {
 
                 mViewModel.select(selected);
-                Toast.makeText(getContext(), "Item selecionado para mostrar", Toast.LENGTH_SHORT).show();
+                mListener.onClientSelected(selected);
 
             }
         });
 
         // Set adapter to RecyclerView to show the iformation
         this.recyclerViewClient.setAdapter(this.clientAdapter);
-
         this.recyclerViewClient.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayout.VERTICAL,false));
 
         return viewInflater;

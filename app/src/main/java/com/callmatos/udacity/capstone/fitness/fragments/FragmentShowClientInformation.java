@@ -59,25 +59,20 @@ public class FragmentShowClientInformation extends Fragment {
         View viewInflater = inflater.inflate(R.layout.fragment_fragment_show_client_information, container, false);
         unbinder = ButterKnife.bind(this, viewInflater);
 
+        this.mViewModel = ViewModelProviders.of(getActivity()).get(ClientViewModel.class);
+
         //Get the client selected
         this.clientPersonalSelected = this.mViewModel.getSelected();
 
-        //Insert the information for TextView
+//        //Insert the information for TextView
         this.labelUserName.setText(this.clientPersonalSelected.getValue().getName());
         this.detalheGoal.setText(this.clientPersonalSelected.getValue().getDetalheGoal());
         this.detalheGym.setText(this.clientPersonalSelected.getValue().getDetalheGym());
         this.detalheTime.setText(Util.getTime(this.clientPersonalSelected.getValue().getHour(),this.clientPersonalSelected.getValue().getMinute()));
 
         //Implementar AssincTask to get of FireBase
-        this.detalhetotalworkout.setText(this.clientPersonalSelected.getValue().getTotalWorkout());
+        this.detalhetotalworkout.setText(String.valueOf(this.clientPersonalSelected.getValue().getTotalWorkout()));
 
         return viewInflater;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-
-        super.onActivityCreated(savedInstanceState);
-        this.mViewModel = ViewModelProviders.of(getActivity()).get(ClientViewModel.class);
     }
 }

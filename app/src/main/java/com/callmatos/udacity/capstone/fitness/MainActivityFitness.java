@@ -98,7 +98,6 @@ public class MainActivityFitness extends AppCompatActivity
             //verify if has the user on Bandle
             if(getIntent().hasExtra(LoginActivityFitness.USERKEY)){
                 this.googleCurrentUser = (UserGoogle) getIntent().getParcelableExtra(LoginActivityFitness.USERKEY);
-                this.clientViewModel.usergoogle(this.googleCurrentUser);
             }else{
                 //Recover the UserLogin session
                 GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -115,6 +114,8 @@ public class MainActivityFitness extends AppCompatActivity
                 }
 
             }
+
+            this.clientViewModel.usergoogle(this.googleCurrentUser);
         }
 
         //Mount the user data logged.
@@ -157,13 +158,9 @@ public class MainActivityFitness extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), NewClientActivityFitness.class);
-                intent.putExtra("user", googleCurrentUser);
-                intent.putExtra("add",true);
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void mountUserGoogleInformation() {
@@ -237,12 +234,9 @@ public class MainActivityFitness extends AppCompatActivity
 
     @Override
     public void onClientSelected(ClientPersonal selectClient) {
-
-        Snackbar.make(this.clientListFragment.getView(), "Client was selected - Call the fragment FragmentShowClientFormatioin", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-
-
-
+        Intent it = new Intent(this,ActivityFitnessDetalhe.class);
+        it.putExtra("selected",selectClient);
+        startActivity(it);
     }
 
     @NonNull
