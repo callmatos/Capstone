@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -134,4 +135,20 @@ public class FragmentNewClient extends Fragment {
     public interface OnFramentNewClientListener {
         void onClickNew();
     }
+
+//    https://github.com/ajmvianna
+
+    /**
+     * Ensure that all fields are filled correctly
+     */
+//    private boolean areFieldsFilled() {
+//        return (!edtToWhere.getText().toString().equals("") &&
+//                !edtFromWhere.getText().toString().equals("") &&
+//                !edtInitialDate.getText().toString().equals("") &&
+//                !edtEndDate.getText().toString().equals("") &&
+//                !edtBudget.getText().toString().equals("") &&
+//                !edtGeneralNotes.getText().toString().equals("") &&
+//                placeTo != null &&
+//                placeFrom != null);
+//    }
 }
