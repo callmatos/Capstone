@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "887762355431",
+    "firebase_url": "https://personal-fitness-1545692647228.firebaseio.com",
+    "project_id": "personal-fitness-1545692647228",
+    "storage_bucket": "personal-fitness-1545692647228.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887762355431:android:76eae79aa0c338e7",
+        "android_client_info": {
+          "package_name": "com.callmatos.udacity.capstone.fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887762355431-i10kd5pp0ttmartko6nob2jlekeg119h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.callmatos.udacity.capstone.fitness",
+            "certificate_hash": "ac435070100f54b98a9f81f62c79acc761725cf1"
+          }
+        },
+        {
+          "client_id": "887762355431-1pf7kge922kbmkuth1dkbqcu50mpu4go.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.callmatos.udacity.capstone.fitness",
+            "certificate_hash": "68774eb5dd55d26cc708435961065c71cbe81404"
+          }
+        },
+        {
+          "client_id": "887762355431-tk1hu6ru4cuqlcces2ou2sk1tok1u8ga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhsLJkbK19TDLaqB76IKffXzeTT4f9n_8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887762355431-tk1hu6ru4cuqlcces2ou2sk1tok1u8ga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
