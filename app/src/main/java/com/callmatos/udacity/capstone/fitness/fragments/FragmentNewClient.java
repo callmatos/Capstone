@@ -22,6 +22,8 @@ import com.callmatos.udacity.capstone.fitness.R;
 import com.callmatos.udacity.capstone.fitness.Utils.ThreadExecutors;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.persistence.PersonalDataBase;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Api;
 
 import java.util.Map;
@@ -29,6 +31,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class FragmentNewClient extends Fragment {
@@ -135,6 +138,22 @@ public class FragmentNewClient extends Fragment {
     public interface OnFramentNewClientListener {
         void onClickNew();
     }
+
+    /**
+     * Open the Maps API to provide to the user an interface to get information regarding a place
+     */
+//    @OnClick({R.id.et_trip_to_where, R.id.et_trip_from_where})
+//    public void getLocalScreen(View view) {
+//        int requestId = -1;
+//
+//        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+//        try {
+//            Intent intent = builder.build(get);
+//            startActivityForResult(intent, requestId);
+//        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 //    https://github.com/ajmvianna
 
