@@ -108,9 +108,9 @@ public class MainActivityFitness extends AppCompatActivity
                     this.googleCurrentUser.setPhotoURL(String.valueOf(account.getPhotoUrl()));
                     this.googleCurrentUser.setUsername(account.getGivenName());
                 }else{
-//                    Intent it = new Intent(this,LoginActivityFitness.class);
-//                    startActivity(it);
-//                    this.finish();
+                    Intent it = new Intent(this,LoginActivityFitness.class);
+                    startActivity(it);
+                    this.finish();
                 }
 
             }
@@ -119,7 +119,7 @@ public class MainActivityFitness extends AppCompatActivity
         }
 
         //Mount the user data logged.
-//        mountUserGoogleInformation();
+        mountUserGoogleInformation();
 
         //Get the Fragment to pass the data to it.
         this.clientListFragment = (ClientListFragment) getSupportFragmentManager().findFragmentById(R.id.clientListFragment);

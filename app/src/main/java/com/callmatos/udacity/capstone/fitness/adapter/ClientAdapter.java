@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.callmatos.udacity.capstone.fitness.Firebase.FbaseRepository;
+import com.callmatos.udacity.capstone.fitness.Firebase.FbaseViewModel;
 import com.callmatos.udacity.capstone.fitness.R;
 import com.callmatos.udacity.capstone.fitness.Util;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
@@ -55,16 +57,8 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolders> {
         recipeViewHolders.clientName.setText(currentClientPersonal.getName());
         recipeViewHolders.locationInformation.setText(currentClientPersonal.getLocationName());
         recipeViewHolders.timeWorkout.setText(Util.getTime(currentClientPersonal.getHour(),currentClientPersonal.getHour()));
-        recipeViewHolders.totalWorkout.setText(String.valueOf(currentClientPersonal.getTotalWorkout()));
 
-        //Image with click to call the Google Map to show the Gym location.
-//        recipeViewHolders.imageLocation.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, "Click on the Map - Show location", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        FbaseRepository.findIdTest(recipeViewHolders.totalWorkout,currentClientPersonal.getId());
 
 
         //Set the Listener

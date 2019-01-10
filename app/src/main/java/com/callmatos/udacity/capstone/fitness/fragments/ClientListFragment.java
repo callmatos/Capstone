@@ -92,6 +92,12 @@ public class ClientListFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        this.clientAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);

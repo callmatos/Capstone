@@ -20,7 +20,7 @@ public class ClientPersonal implements Serializable {
 
     private int minute;
 
-    private int totalWorkout;
+//    private int totalWorkout;
 
     private String detalheGoal;
 
@@ -48,13 +48,13 @@ public class ClientPersonal implements Serializable {
         return locationName;
     }
 
-    public int getTotalWorkout() {
-        return totalWorkout;
-    }
-
-    public void setTotalWorkout(int totalWorkout) {
-        this.totalWorkout = totalWorkout;
-    }
+//    public int getTotalWorkout() {
+//        return totalWorkout;
+//    }
+//
+//    public void setTotalWorkout(int totalWorkout) {
+//        this.totalWorkout = totalWorkout;
+//    }
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;

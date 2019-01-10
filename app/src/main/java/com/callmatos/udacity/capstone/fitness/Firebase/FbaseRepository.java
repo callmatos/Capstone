@@ -2,7 +2,9 @@ package com.callmatos.udacity.capstone.fitness.Firebase;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.widget.TextView;
 
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.google.android.gms.tasks.Task;
@@ -11,30 +13,33 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FbaseRepository {
 
-    public boolean saveClientPersonal(ClientPersonal obje){
+    public static boolean registerClient(Integer idClient,Integer totalworkout){
 
-        Task<Void> result = FbaseConnection.getInstance().child("clients").child(obje.getId().toString()).setValue(obje);
+        Task<Void> result = FbaseConnection.getInstance().child("clients").child(String.valueOf(idClient)).setValue(totalworkout);
         return result.isSuccessful();
     }
 
-    public LiveData<List<ClientPersonal>> getListClients(){
+    public LiveData<Map<Integer,Integer>> getListClients(){
 
-        final MutableLiveData<List<ClientPersonal>> unitList = new MutableLiveData<>();
+        final MutableLiveData<Map<Integer,Integer>> unitList = new MutableLiveData<>();
 
         FbaseConnection.getInstance().child("clients").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<ClientPersonal> partialUnitList = new ArrayList<>();
+
+                Map<Integer,Integer> partialUnitList = new HashMap<>();
 
                 for (DataSnapshot unitChildren : dataSnapshot.getChildren()){
 
                     if (unitChildren != null)
-                        partialUnitList.add((ClientPersonal)unitChildren.getValue());
+                        partialUnitList.put(Integer.valueOf(unitChildren.getKey()),Integer.valueOf(unitChildren.getValue().toString()));
                 }
 
                 unitList.setValue(partialUnitList);
@@ -49,22 +54,16 @@ public class FbaseRepository {
         return unitList;
     }
 
-    public LiveData<ClientPersonal> findClientById(String id){
+    public static LiveData<Integer> findClientById(Integer id){
 
-        final MutableLiveData<ClientPersonal> unitList = new MutableLiveData<>();
+        final MutableLiveData<Integer> unitList = new MutableLiveData<>();
 
-        FbaseConnection.getInstance().child("clients").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        FbaseConnection.getInstance().child("clients").child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                ClientPersonal partialUnitList = null;
-
-                for (DataSnapshot unitChildren : dataSnapshot.getChildren()){
-
-                    if (unitChildren != null)
-                        partialUnitList = ((ClientPersonal)unitChildren.getValue());
-                }
+                Integer partialUnitList = dataSnapshot.getValue(Integer.class);
 
                 unitList.setValue(partialUnitList);
             }
@@ -79,10 +78,22 @@ public class FbaseRepository {
 
     }
 
-    public boolean removeById(String id){
+    public static void findIdTest(final TextView obj, Integer id){
 
-        Task<Void> resuts = FbaseConnection.getInstance().child("clients").child(id).removeValue();
-        return resuts.isSuccessful();
+        FbaseConnection.getInstance().child("clients").child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                obj.setText(String.valueOf(dataSnapshot.getValue(Integer.class)));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

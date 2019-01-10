@@ -16,7 +16,7 @@ import java.util.List;
 public interface ClientDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertClient(ClientPersonal mv);
+    public long insertClient(ClientPersonal mv);
 
     @Delete
     public void deleteClient(ClientPersonal mv);
@@ -31,7 +31,7 @@ public interface ClientDAO {
     LiveData<List<ClientPersonal>> getAllClientLiveData();
 
     @Query("SELECT * from clientpersonal where id = :id")
-    ClientPersonal findClientPersonalById(int id);
+    ClientPersonal findClientPersonalById(long id);
 
     @Query("SELECT * from clientpersonal where id = :id")
     LiveData<ClientPersonal> findClientPersonalByIdLiveData(int id);

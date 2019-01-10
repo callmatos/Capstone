@@ -3,6 +3,7 @@ package com.callmatos.udacity.capstone.fitness.fragments;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.callmatos.udacity.capstone.fitness.Firebase.FbaseConnection;
+import com.callmatos.udacity.capstone.fitness.Firebase.FbaseRepository;
+import com.callmatos.udacity.capstone.fitness.Firebase.FbaseViewModel;
 import com.callmatos.udacity.capstone.fitness.R;
 import com.callmatos.udacity.capstone.fitness.Util;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
@@ -71,7 +76,23 @@ public class FragmentShowClientInformation extends Fragment {
         this.detalheTime.setText(Util.getTime(this.clientPersonalSelected.getValue().getHour(),this.clientPersonalSelected.getValue().getMinute()));
 
         //Implementar AssincTask to get of FireBase
-        this.detalhetotalworkout.setText(String.valueOf(this.clientPersonalSelected.getValue().getTotalWorkout()));
+//      this.detalhetotalworkout.setText(FbaseViewModel.);
+        FbaseRepository.findIdTest(this.detalhetotalworkout,this.clientPersonalSelected.getValue().getId());
+
+
+
+        this.detalhetotalworkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int increse = Integer.valueOf(detalhetotalworkout.getText().toString());
+                increse++;
+
+                detalhetotalworkout.setText(String.valueOf(increse));
+                FbaseRepository.registerClient(clientPersonalSelected.getValue().getId(), increse);
+
+            }
+        });
 
         return viewInflater;
     }

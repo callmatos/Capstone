@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 
 import java.util.List;
+import java.util.Map;
 
 public class FbaseViewModel extends AndroidViewModel{
 
@@ -18,20 +19,17 @@ public class FbaseViewModel extends AndroidViewModel{
         fbaseRepository = new FbaseRepository();
     }
 
-    public LiveData<List<ClientPersonal>> getListPersonal(){
+    public LiveData<Map<Integer,Integer>> getMapTotalWorkoutClient(){
         return fbaseRepository.getListClients();
     }
 
-    public LiveData<ClientPersonal> findById(String id){
+    public LiveData<Integer> findById(Integer id){
         return fbaseRepository.findClientById(id);
     }
 
-    public boolean removeClient(String id){
-        return fbaseRepository.removeById(id);
-    }
 
-    public boolean saveClient(ClientPersonal client){
-        return fbaseRepository.saveClientPersonal(client);
+    public boolean saveClient(Integer client,Integer totalworkout){
+        return fbaseRepository.registerClient(client,totalworkout);
     }
 
 }
