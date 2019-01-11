@@ -24,7 +24,7 @@
             android:src="@drawable/user"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="16dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintDimensionRatio="h,1:1"/>
 
@@ -41,7 +41,7 @@
                     android:id="@+id/clientNameInformation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Patricia Oliveira"/>
+                    android:text="@string/name_dum"/>
                 <LinearLayout
                     android:id="@+id/gymlocation"
                     android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                         android:id="@+id/gymLocationInformation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Strong Body"/>
+                        android:text="@string/body_location"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/gymTime"
@@ -71,7 +71,7 @@
                         android:id="@+id/gymTimeWorkout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="07:30pm"/>
+                        android:text="@string/time_dum"/>
                 </LinearLayout>
 
         </LinearLayout>

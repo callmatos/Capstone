@@ -5,7 +5,9 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,14 +23,21 @@ import com.callmatos.udacity.capstone.fitness.R;
 import com.callmatos.udacity.capstone.fitness.Utils.ThreadExecutors;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.persistence.PersonalDataBase;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Api;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.util.Map;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static android.app.Activity.RESULT_OK;
 
 public class FragmentNewClient extends Fragment {
 
@@ -59,7 +68,14 @@ public class FragmentNewClient extends Fragment {
     //DB to save the new client
     private PersonalDataBase db;
 
+    //Button to add a new register
     private FbaseViewModel fbaseData;
+
+    // Start the Place to find the place.
+    private static final int PLACE_PICKER_REQUEST_TO = 1;
+
+    //Place maps seach
+    public Place placeSelect = null;
 
     public static FragmentNewClient newInstance() {
         FragmentNewClient fragment = new FragmentNewClient();
@@ -87,6 +103,7 @@ public class FragmentNewClient extends Fragment {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(getContext(), "Save new client", Toast.LENGTH_SHORT).show();
 
                 //Save the data on database and inform to activity to close the activity
@@ -95,20 +112,25 @@ public class FragmentNewClient extends Fragment {
                     @Override
                     public void run() {
 
-                        ClientPersonal test = new ClientPersonal();
-                        test.setDetalheGoal(clientGoal.getText().toString());
-                        test.setDetalheGym(gymClinet.getText().toString());
-                        test.setLocationName("Four Fitness");
-                        test.setName(clientName.getText().toString());
-                        test.setHour(clientTime.getHour());
-                        test.setMinute(clientTime.getMinute());
+                        if(areFieldsFilled()){
 
-                        long id = db.clientDAO().insertClient(test);
-                        test = db.clientDAO().findClientPersonalById(id);
+                            ClientPersonal test = new ClientPersonal();
 
-                        //Save on Firebase the workout of client
-                        fbaseData.saveClient(test.getId(),0);
+                            test.setDetalheGoal(clientGoal.getText().toString());
+                            test.setDetalheGym(placeSelect.getName().toString());
+                            test.setLocationName(placeSelect.getAddress().toString());
+                            test.setLatitude(placeSelect.getLatLng().latitude);
+                            test.setLongitude(placeSelect.getLatLng().longitude);
+                            test.setName(clientName.getText().toString());
+                            test.setHour(clientTime.getHour());
+                            test.setMinute(clientTime.getMinute());
 
+                            long id = db.clientDAO().insertClient(test);
+                            test = db.clientDAO().findClientPersonalById(id);
+
+                            //Save on Firebase the workout of client
+                            fbaseData.saveClient(test.getId(),0);
+                        }
                     }
                 });
 
@@ -118,6 +140,25 @@ public class FragmentNewClient extends Fragment {
         });
         
         return viewInflater;
+    }
+
+    /**
+     * Open the Maps API to provide to the user an interface to get information regarding a place
+     */
+    @OnClick({R.id.editText2})
+    public void getLocalScreen(View view) {
+
+        this.mListener.onSearchPlace();
+    }
+
+    /**
+     * Ensure that all fields are filled correctly
+     */
+    private boolean areFieldsFilled() {
+        return (!clientName.getText().toString().equals("") &&
+                !clientGoal.getText().toString().equals("") &&
+                !gymClinet.getText().toString().equals("") &&
+                placeSelect != null);
     }
 
     @Override
@@ -133,5 +174,6 @@ public class FragmentNewClient extends Fragment {
 
     public interface OnFramentNewClientListener {
         void onClickNew();
+        void onSearchPlace();
     }
 }
