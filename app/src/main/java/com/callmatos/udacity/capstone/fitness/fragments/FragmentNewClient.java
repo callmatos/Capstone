@@ -117,10 +117,10 @@ public class FragmentNewClient extends Fragment {
                             ClientPersonal test = new ClientPersonal();
 
                             test.setDetalheGoal(clientGoal.getText().toString());
-                            test.setDetalheGym(placeSelect.getName().toString());
-                            test.setLocationName(placeSelect.getAddress().toString());
-                            test.setLatitude(placeSelect.getLatLng().latitude);
-                            test.setLongitude(placeSelect.getLatLng().longitude);
+//                            test.setDetalheGym(placeSelect.getName().toString());
+//                            test.setLocationName(placeSelect.getAddress().toString());
+//                            test.setLatitude(placeSelect.getLatLng().latitude);
+//                            test.setLongitude(placeSelect.getLatLng().longitude);
                             test.setName(clientName.getText().toString());
                             test.setHour(clientTime.getHour());
                             test.setMinute(clientTime.getMinute());
@@ -156,9 +156,11 @@ public class FragmentNewClient extends Fragment {
      */
     private boolean areFieldsFilled() {
         return (!clientName.getText().toString().equals("") &&
-                !clientGoal.getText().toString().equals("") &&
-                !gymClinet.getText().toString().equals("") &&
-                placeSelect != null);
+                !clientGoal.getText().toString().equals("")
+//                &&
+                //!gymClinet.getText().toString().equals("") &&
+//                placeSelect != null
+        );
     }
 
     @Override

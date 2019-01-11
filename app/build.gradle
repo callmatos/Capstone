@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -35,7 +35,7 @@ dependencies {
 
     //Play Services Dependencies
     //implementation 'com.google.firebase:firebase-auth:16.0.5'
-    implementation 'com.google.android.gms:play-services-auth:12.0.1'
+    implementation 'com.google.android.gms:play-services-auth:16.0.0'
 
     //3rd Libary - Inject Android object and get reference.
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -63,14 +63,14 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 
     //implementation 'com.google.firebase:firebase-database:16.0.1'
-    implementation 'com.google.firebase:firebase-database:12.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
 
     //    implementation 'com.google.android.gms:play-services:12.0.1' /data/app/com.callmatos.udacity.capstone.fitness-3XxnazxlmrmOonb7vXdfdw==/split_lib_dependencies_apk.apk)
     implementation 'com.google.android.gms:play-services:12.0.1'
-    implementation 'com.google.android.gms:play-services-plus:12.0.1'
-    implementation 'com.google.android.gms:play-services-maps:12.0.1'
-    implementation 'com.google.android.gms:play-services-location:12.0.1'
-    implementation 'com.google.android.gms:play-services-places:12.0.1'
+    implementation 'com.google.android.gms:play-services-plus:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
 }
 
 //apply plugin: 'com.google.gms.google-services'
