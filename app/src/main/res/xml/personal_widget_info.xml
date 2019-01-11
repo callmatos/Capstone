@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialKeyguardLayout="@layout/personal_widget"
+    android:initialLayout="@layout/personal_widget"
+    android:minHeight="70dp"
+    android:minWidth="300dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="100"
+    android:widgetCategory="home_screen"
+    android:previewImage="@drawable/user"/>
+

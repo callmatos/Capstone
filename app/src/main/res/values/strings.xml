@@ -29,4 +29,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="det_time">07:30 AM</string>
     <string name="totalworkout">Total Workouts</string>
+
+    <string name="image">Image</string>
+    <string name="name_dum">Patricia Oliveira</string>
+    <string name="body_location">Strong Body</string>
+    <string name="time_dum">07:30pm</string>
+
+    <string name="google_maps_key">AIzaSyASjTYINNbC7PplmafFDbMusyGO3tGehAk</string>
+
+    <string name="personal_content_description">Imagem de um rosto simbolizando uma cliente!</string>
+
+    <string name="widget_empty_text">Sem novo registro...</string>
+
 </resources>
