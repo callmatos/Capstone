@@ -1,6 +1,7 @@
 package com.callmatos.udacity.capstone.fitness.fragments;
 
 
+import android.app.PendingIntent;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.lifecycle.LiveData;
@@ -23,6 +24,7 @@ import com.callmatos.udacity.capstone.fitness.R;
 import com.callmatos.udacity.capstone.fitness.Utils.ThreadExecutors;
 import com.callmatos.udacity.capstone.fitness.model.ClientPersonal;
 import com.callmatos.udacity.capstone.fitness.persistence.PersonalDataBase;
+import com.callmatos.udacity.capstone.fitness.widget.PersonalWidgetService;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Api;
@@ -101,6 +103,7 @@ public class FragmentNewClient extends Fragment {
         this.fbaseData = ViewModelProviders.of(getActivity()).get(FbaseViewModel.class);
 
         btSave.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -117,10 +120,10 @@ public class FragmentNewClient extends Fragment {
                             ClientPersonal test = new ClientPersonal();
 
                             test.setDetalheGoal(clientGoal.getText().toString());
-//                            test.setDetalheGym(placeSelect.getName().toString());
-//                            test.setLocationName(placeSelect.getAddress().toString());
-//                            test.setLatitude(placeSelect.getLatLng().latitude);
-//                            test.setLongitude(placeSelect.getLatLng().longitude);
+                            test.setDetalheGym(placeSelect.getName().toString());
+                            test.setLocationName(placeSelect.getAddress().toString());
+                            test.setLatitude(placeSelect.getLatLng().latitude);
+                            test.setLongitude(placeSelect.getLatLng().longitude);
                             test.setName(clientName.getText().toString());
                             test.setHour(clientTime.getHour());
                             test.setMinute(clientTime.getMinute());
@@ -130,6 +133,7 @@ public class FragmentNewClient extends Fragment {
 
                             //Save on Firebase the workout of client
                             fbaseData.saveClient(test.getId(),0);
+
                         }
                     }
                 });
@@ -140,6 +144,22 @@ public class FragmentNewClient extends Fragment {
         });
         
         return viewInflater;
+    }
+
+    //Call the Widget to update
+    public void startIntentServiceWidgetUpdate(ClientPersonal clientPerjsonal){
+
+        // Add the wateringservice click handler
+        Intent wateringIntent = new Intent(getActivity(), PersonalWidgetService.class);
+        Bundle data = new Bundle();
+
+        data.putSerializable(PersonalWidgetService.RECIPE,clientPerjsonal);
+
+        wateringIntent.putExtras(data);
+
+        PendingIntent.getService(getActivity(), 0, wateringIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        getActivity().startService(wateringIntent);
     }
 
     /**

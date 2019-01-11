@@ -52,6 +52,8 @@ public class FragmentShowClientInformation extends Fragment {
     @BindView(R.id.detalhetotalworkout)
     public TextView detalhetotalworkout;
 
+    public static String ID_WIDGET = "id";
+
     public static FragmentShowClientInformation newInstance() {
         return new FragmentShowClientInformation();
     }

@@ -35,7 +35,8 @@
     <string name="body_location">Strong Body</string>
     <string name="time_dum">07:30pm</string>
 
-    <string name="google_maps_key">AIzaSyASjTYINNbC7PplmafFDbMusyGO3tGehAk</string>
+    <!--<string name="google_maps_key">AIzaSyASjTYINNbC7PplmafFDbMusyGO3tGehAk</string>-->
+    <string name="google_maps_key">AIzaSyDhsLJkbK19TDLaqB76IKffXzeTT4f9n_8</string>
 
     <string name="personal_content_description">Imagem de um rosto simbolizando uma cliente!</string>
 
