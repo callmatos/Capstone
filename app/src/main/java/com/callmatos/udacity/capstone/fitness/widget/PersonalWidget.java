@@ -27,6 +27,10 @@ public class PersonalWidget extends AppWidgetProvider {
                                        int appWidgetId,ClientPersonal cl) {
 
         RemoteViews views = null;
+
+        if(cl!=null)
+            clientPersonal = cl;
+
         if (clientPersonal != null) {
             views = new RemoteViews(context.getPackageName(), R.layout.personal_widget);
             views.setTextViewText(R.id.client_name_widget, clientPersonal.getName());

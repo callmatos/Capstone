@@ -47,6 +47,8 @@
                 android:value="com.callmatos.udacity.capstone.fitness.MainActivityFitness" />
         </activity>
 
+        <service android:name=".widget.PersonalWidgetService" />
+
         <receiver android:name=".widget.PersonalWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_ADDED" />

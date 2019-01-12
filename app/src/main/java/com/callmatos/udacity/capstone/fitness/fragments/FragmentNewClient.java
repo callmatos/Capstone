@@ -134,6 +134,8 @@ public class FragmentNewClient extends Fragment {
                             //Save on Firebase the workout of client
                             fbaseData.saveClient(test.getId(),0);
 
+                            startIntentServiceWidgetUpdate(test.getId());
+
                         }
                     }
                 });
@@ -147,7 +149,7 @@ public class FragmentNewClient extends Fragment {
     }
 
     //Call the Widget to update
-    public void startIntentServiceWidgetUpdate(ClientPersonal clientPerjsonal){
+    public void startIntentServiceWidgetUpdate(Integer clientPerjsonal){
 
         // Add the wateringservice click handler
         Intent wateringIntent = new Intent(getActivity(), PersonalWidgetService.class);

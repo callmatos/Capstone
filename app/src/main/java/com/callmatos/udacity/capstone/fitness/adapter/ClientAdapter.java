@@ -55,7 +55,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolders> {
 
         //mount the cardview with information of client
         recipeViewHolders.clientName.setText(currentClientPersonal.getName());
-        recipeViewHolders.locationInformation.setText(currentClientPersonal.getLocationName());
+        recipeViewHolders.locationInformation.setText(currentClientPersonal.getDetalheGym());
         recipeViewHolders.timeWorkout.setText(Util.getTime(currentClientPersonal.getHour(),currentClientPersonal.getHour()));
 
         FbaseRepository.findIdTest(recipeViewHolders.totalWorkout,currentClientPersonal.getId());
