@@ -35,6 +35,10 @@
     <string name="body_location">Strong Body</string>
     <string name="time_dum">07:30pm</string>
 
+    <string name="fill_all_fields_message">Por favor, preencher todos os campos!</string>
+
+    <string name="clicktoopenmap">Click to open the map</string>
+
     <!--<string name="google_maps_key">AIzaSyASjTYINNbC7PplmafFDbMusyGO3tGehAk</string>-->
     <string name="google_maps_key">AIzaSyDhsLJkbK19TDLaqB76IKffXzeTT4f9n_8</string>
 

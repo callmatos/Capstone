@@ -107,8 +107,6 @@ public class FragmentNewClient extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getContext(), "Save new client", Toast.LENGTH_SHORT).show();
-
                 //Save the data on database and inform to activity to close the activity
                 ThreadExecutors.getInstance().getDisIO().execute(new Runnable() {
 
@@ -136,12 +134,20 @@ public class FragmentNewClient extends Fragment {
 
                             startIntentServiceWidgetUpdate(test.getId());
 
+                            //Close the activity
+                            mListener.onClickNew();
+
+                        }else{
+
+                            //Toast.makeText(getActivity(), R.string.fill_all_fields_message, Toast.LENGTH_SHORT).show();
+
+                            if (placeSelect == null)
+                                gymClinet.setText("");
                         }
                     }
                 });
 
-                //Close the activity
-                mListener.onClickNew();
+
             }
         });
         
@@ -178,10 +184,8 @@ public class FragmentNewClient extends Fragment {
      */
     private boolean areFieldsFilled() {
         return (!clientName.getText().toString().equals("") &&
-                !clientGoal.getText().toString().equals("")
-//                &&
-                //!gymClinet.getText().toString().equals("") &&
-//                placeSelect != null
+                !clientGoal.getText().toString().equals("") &&
+                placeSelect != null
         );
     }
 
