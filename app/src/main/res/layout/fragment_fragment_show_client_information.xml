@@ -33,7 +33,7 @@
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="@string/labelclientname"
-            android:textSize="21dp"
+            android:textSize="21sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/detalheUserImage" />
@@ -72,16 +72,6 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/detalheGoal" />
 
-        <!--<ImageView-->
-            <!--android:id="@+id/detalheButtonMap"-->
-            <!--android:layout_width="32dp"-->
-            <!--android:layout_height="32dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:src="@drawable/marker"-->
-            <!--app:layout_constraintBottom_toBottomOf="@+id/detalheGym"-->
-            <!--app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
-            <!--app:layout_constraintTop_toTopOf="@+id/detalheGym"-->
-            <!--tools:ignore="MissingConstraints" />-->
 
         <TextView
             android:id="@+id/labelTime"
@@ -101,7 +91,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="TextView"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/informGoal" />
@@ -113,8 +102,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="TextView"
-
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/labelGym" />
@@ -152,7 +139,6 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/ic_sharp_panorama_fish_eye_24px"
             android:gravity="center"
-            android:text="0"
             android:textAlignment="center"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
