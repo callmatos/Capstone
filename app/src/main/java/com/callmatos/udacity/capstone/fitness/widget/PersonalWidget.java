@@ -78,28 +78,6 @@ public class PersonalWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-//
-//    public static void updateWidget(Context context) {
-//
-//        List<ClientPersonal> clientList = new ArrayList<>();
-//
-//        clientList = PersonalDataBase.getInstance(context).clientDAO().getAllClientPersonal();
-//
-//        if (clientList != null && clientList.size() > 0)
-//            clientPersonal = clientList.get(0);
-//        else
-//            clientPersonal = null;
-//
-//        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-//
-//        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, PersonalWidget.class));
-//
-//        for (int appWidgetId : appWidgetIds) {
-//            updateAppWidget(context, appWidgetManager, appWidgetId);
-//        }
-//
-//    }
-
 }
 
 

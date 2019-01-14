@@ -30,63 +30,60 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutInformation"
-            android:layout_width="120dp"
+            android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/totalWorkoutLinear"
             app:layout_constraintStart_toEndOf="@+id/card_baking_image"
             app:layout_constraintTop_toTopOf="parent">
-                <TextView
-                    android:id="@+id/clientNameInformation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name_dum"/>
-                <LinearLayout
-                    android:id="@+id/gymlocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/labelgym"/>
 
-                    <TextView
-                        android:id="@+id/gymLocationInformation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/body_location"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/gymTime"
+            <TextView
+                android:id="@+id/clientNameInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/name_dum" />
+
+            <LinearLayout
+                android:id="@+id/gymlocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/time"/>
-                    <TextView
-                        android:id="@+id/gymTimeWorkout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/time_dum"/>
-                </LinearLayout>
+                    android:text="@string/labelgym" />
+
+                <TextView
+                    android:id="@+id/gymLocationInformation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/body_location" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/gymTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time" />
+
+                <TextView
+                    android:id="@+id/gymTimeWorkout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_dum" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <!--<ImageView-->
-            <!--android:id="@+id/img_location"-->
-            <!--android:layout_width="32dp"-->
-            <!--android:layout_height="32dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:src="@drawable/marker"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintStart_toEndOf="@id/linearLayoutInformation"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
         <LinearLayout
             android:id="@+id/totalWorkoutLinear"
@@ -112,7 +109,6 @@
                 android:layout_gravity="center"
                 android:background="@drawable/ic_sharp_panorama_fish_eye_24px"
                 android:gravity="center"
-                android:text="0"
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceListItem" />
         </LinearLayout>

@@ -55,9 +55,6 @@ public class FragmentNewClient extends Fragment {
     @BindView(R.id.editText2)
     public EditText gymClinet;
 
-//    @BindView(R.id.detalheButtonMap)
-//    public ImageView detalheButtonMap;
-
     @BindView(R.id.timePicker1)
     public TimePicker clientTime;
 
@@ -139,8 +136,13 @@ public class FragmentNewClient extends Fragment {
 
                         }else{
 
-                            //Toast.makeText(getActivity(), R.string.fill_all_fields_message, Toast.LENGTH_SHORT).show();
-
+                            //showToast();
+                            ThreadExecutors.getInstance().getMainThread().execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showToast();
+                                }
+                            });
                             if (placeSelect == null)
                                 gymClinet.setText("");
                         }
@@ -152,6 +154,11 @@ public class FragmentNewClient extends Fragment {
         });
         
         return viewInflater;
+    }
+
+    private void showToast(){
+
+        Toast.makeText(getActivity(), R.string.fill_all_fields_message, Toast.LENGTH_SHORT).show();
     }
 
     //Call the Widget to update

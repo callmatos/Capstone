@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'personal'
             keyPassword '123456'
-            storeFile file('/home/charles/Documents/PersonalFitness/keystore.jks')
+            storeFile file('/home/charles/Documents/keystore.jks')
             storePassword '123456'
         }
     }

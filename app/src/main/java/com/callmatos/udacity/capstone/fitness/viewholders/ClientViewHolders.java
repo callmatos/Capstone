@@ -36,9 +36,6 @@ public class ClientViewHolders extends RecyclerView.ViewHolder {
     @BindView(R.id.totalworkout)
     public TextView totalWorkout;
 
-//    @BindView(R.id.img_location)
-//    public ImageView imageLocation;
-
     //Default Constructor
     public ClientViewHolders(@NonNull View itemView) {
         super(itemView);
