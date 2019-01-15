@@ -16,7 +16,7 @@ public abstract class PersonalDataBase extends RoomDatabase {
     private static final Object LOCK = new Object();
 
     //Variable with name of database.
-    public static String DATABASE_NAME = "personalfitness";
+    public static final String DATABASE_NAME = "personalfitness";
 
     //Single object
     private static PersonalDataBase INSTANCE;
@@ -29,13 +29,11 @@ public abstract class PersonalDataBase extends RoomDatabase {
 
         synchronized (LOCK) {
             if (INSTANCE == null) {
-                Log.d(LOG_TAG, "Creating new database instance");
                 INSTANCE = Room.databaseBuilder(ct.getApplicationContext(),
                         PersonalDataBase.class, DATABASE_NAME)
                         .build();
             }
         }
-        Log.d(LOG_TAG, "Getting the database instance");
         return INSTANCE;
     }
 }

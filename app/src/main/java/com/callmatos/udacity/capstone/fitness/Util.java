@@ -16,9 +16,9 @@ import java.text.SimpleDateFormat;
 
 public class Util {
 
-    private static String SHARED_PREF_KEY = "ownPersonalFitness";
-    private static String SHARED_PREF_EMAIL = "ownEmail";
-    private static String SHARED_PREF_NAME = "ownName";
+    private static final String SHARED_PREF_KEY = "ownPersonalFitness";
+    private static final String SHARED_PREF_EMAIL = "ownEmail";
+    private static final String SHARED_PREF_NAME = "ownName";
 
     /**
      * Method that checks if there is a valid network connection

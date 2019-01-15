@@ -27,8 +27,6 @@ public class ClientViewModel extends AndroidViewModel {
         super(application);
 
         PersonalDataBase db = PersonalDataBase.getInstance(this.getApplication());
-
-        Log.v(TAG,"Actively retrieving the clients from the Database");
         clients = db.clientDAO().getAllClientLiveData();
     }
 

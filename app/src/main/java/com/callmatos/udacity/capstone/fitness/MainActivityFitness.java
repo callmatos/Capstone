@@ -49,6 +49,8 @@ public class MainActivityFitness extends AppCompatActivity
     //Used to loader data.
     private static final int CLIENTCAST_LOADER_ID = 0;
 
+    private static final String SELECTED = "selected";
+
     //Main
     private Unbinder unbinder;
 
@@ -132,7 +134,6 @@ public class MainActivityFitness extends AppCompatActivity
 
             @Override
             public void onChanged(@Nullable List<ClientPersonal> taskEntries) {
-                Log.d(TAG, "Receiving database update from LiveData");
                 clientListFragment.updateDataClient(taskEntries);
             }
         });
@@ -236,7 +237,7 @@ public class MainActivityFitness extends AppCompatActivity
     @Override
     public void onClientSelected(ClientPersonal selectClient) {
         Intent it = new Intent(this,ActivityFitnessDetalhe.class);
-        it.putExtra("selected",selectClient);
+        it.putExtra(SELECTED,selectClient);
         startActivity(it);
     }
 

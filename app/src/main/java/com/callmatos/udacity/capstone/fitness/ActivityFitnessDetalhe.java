@@ -20,13 +20,16 @@ public class ActivityFitnessDetalhe extends AppCompatActivity {
     private ClientViewModel clientViewModelMainActivity;
     private ClientPersonal selected;
 
+    private static String ITEM_ID = "selected";
+    private static String INFClient= "INFClient";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fitness_detalhe);
 
-        selected = (ClientPersonal) getIntent().getSerializableExtra("selected");
+        selected = (ClientPersonal) getIntent().getSerializableExtra(ITEM_ID);
 
         clientViewModelMainActivity = ViewModelProviders.of(this).get(ClientViewModel.class);
         clientViewModelMainActivity.select(selected);
@@ -34,7 +37,7 @@ public class ActivityFitnessDetalhe extends AppCompatActivity {
         this.fragmentInformationClient = FragmentShowClientInformation.newInstance();
 
         //Commit the fragment
-        getSupportFragmentManager().beginTransaction().add(R.id.detalheclientFragment,this.fragmentInformationClient,"INFClient").commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.detalheclientFragment,this.fragmentInformationClient,INFClient).commit();
     }
 
 }

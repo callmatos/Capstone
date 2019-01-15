@@ -19,9 +19,11 @@ import java.util.Map;
 
 public class FbaseRepository {
 
+    private static String CLIENT="clients";
+
     public static boolean registerClient(Integer idClient,Integer totalworkout){
 
-        Task<Void> result = FbaseConnection.getInstance().child("clients").child(String.valueOf(idClient)).setValue(totalworkout);
+        Task<Void> result = FbaseConnection.getInstance().child(CLIENT).child(String.valueOf(idClient)).setValue(totalworkout);
         return result.isSuccessful();
     }
 
@@ -29,7 +31,7 @@ public class FbaseRepository {
 
         final MutableLiveData<Map<Integer,Integer>> unitList = new MutableLiveData<>();
 
-        FbaseConnection.getInstance().child("clients").addListenerForSingleValueEvent(new ValueEventListener() {
+        FbaseConnection.getInstance().child(CLIENT).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,7 +60,7 @@ public class FbaseRepository {
 
         final MutableLiveData<Integer> unitList = new MutableLiveData<>();
 
-        FbaseConnection.getInstance().child("clients").child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
+        FbaseConnection.getInstance().child(CLIENT).child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -80,7 +82,7 @@ public class FbaseRepository {
 
     public static void findIdTest(final TextView obj, Integer id){
 
-        FbaseConnection.getInstance().child("clients").child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
+        FbaseConnection.getInstance().child(CLIENT).child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
